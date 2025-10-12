@@ -1,0 +1,158 @@
+/* 全体 */
+body {
+    background-color: #ffffff !important; /* 背景は完全な白 */
+    color: #3b2a1a;
+    font-family: 'Noto Sans JP', sans-serif;
+}
+
+/* メインコンテナ */
+.contact-container {
+    width: 70%;
+    max-width: 900px;
+    margin: 80px auto;
+}
+
+/* タイトル */
+.brand-title {
+    text-align: center;
+    color: #4b2e1e; /* ミルクダークブラウン */
+    font-size: 36px;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+/* 区切り線 */
+.header-line {
+    width: 100%;
+    height: 1px;
+    background-color: #f1e8de; /* ごく淡いベージュ */
+    border: none;
+    margin-bottom: 25px;
+}
+
+/* Contact 見出し */
+.contact-title {
+    text-align: center;
+    color: #4b2e1e;
+    font-size: 22px;
+    font-weight: 600;
+    margin-bottom: 50px;
+}
+
+/* 各フォームグループ */
+.form-group {
+    margin-bottom: 25px;
+}
+
+label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 6px;
+    color: #3b2a1a;
+}
+
+.required {
+    color: #c9302c;
+}
+
+/* 名前欄 */
+.name-fields {
+    display: flex;
+    justify-content: space-between;
+    gap: 2%;
+}
+
+.name-fields input {
+    width: 49%;
+}
+
+/* 電話番号欄 */
+.tel-fields {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.tel-fields input {
+    width: 25%;
+    text-align: center;
+}
+
+.hyphen {
+    color: #3b2a1a;
+}
+
+/* 入力欄・セレクト・テキストエリア */
+input, select, textarea {
+    width: 100%;
+    padding: 10px 12px;
+    border: none;
+    border-radius: 5px;
+    background-color: #f9f6f3; /* ごく淡いベージュの入力背景 */
+    color: #3b2a1a;
+    font-size: 14px;
+    outline: none;
+}
+
+::placeholder {
+    color: rgba(75, 46, 30, 0.4); /* 透けた茶色（ベージュ寄り） */
+}
+
+/* 性別 */
+.gender-options {
+    display: flex;
+    gap: 30px;
+}
+
+.gender-options input[type="radio"] {
+    accent-color: #4b2e1e; /* 茶色の● */
+}
+
+/* セレクトボックス */
+.select-wrapper {
+    position: relative;
+}
+
+.select-wrapper select {
+    appearance: none;
+    background: #f9f6f3;
+    color: rgba(75, 46, 30, 0.7);
+    cursor: pointer;
+}
+
+.select-wrapper::after {
+    content: "▼";
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #4b2e1e;
+    pointer-events: none;
+}
+
+/* テキストエリア */
+textarea {
+    height: 150px;
+    resize: none;
+}
+
+/* 確認ボタン */
+.form-submit {
+    text-align: center;
+    margin-top: 50px;
+}
+
+.form-submit button {
+    background-color: #4b2e1e; /* ミルクダークブラウン */
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 12px 40px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+.form-submit button:hover {
+    background-color: #2e1d13;
+}

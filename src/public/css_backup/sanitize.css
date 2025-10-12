@@ -1,0 +1,69 @@
+/* 1. 基本設定 */
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+/* 2. HTML5要素の表示設定 */
+article, aside, figcaption, figure, footer, header, hgroup, main, nav, section {
+    display: block;
+}
+
+/* 3. bodyとフォントの基本設定 */
+html {
+    line-height: 1.15; /* IE対応 */
+    -webkit-text-size-adjust: 100%; /* Safariの文字サイズ調整無効化 */
+}
+body {
+    margin: 0;
+    font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol";
+    color: #333;
+    line-height: 1.5;
+}
+
+/* 4. 見出しと段落 */
+h1, h2, h3, h4, h5, h6, p {
+    font-size: 100%;
+    font-weight: normal;
+}
+
+/* 5. リンクとボタン */
+a {
+    background-color: transparent;
+    text-decoration: none; /* 下線を削除 */
+    color: inherit;
+}
+button {
+    text-transform: none;
+    cursor: pointer;
+    background: none;
+    border: none;
+}
+
+/* 6. リスト */
+ul, ol {
+    list-style: none;
+}
+
+/* 7. フォーム要素の基本リセット */
+input, button, textarea, select {
+    font-family: inherit;
+    font-size: 100%;
+    line-height: 1.15;
+    margin: 0;
+}
+input[type="number"]::-webkit-inner-spin-button, 
+input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+textarea {
+    overflow: auto;
+    resize: vertical;
+}
+/* 8. 画像 */
+img {
+    border-style: none;
+    vertical-align: middle;
+}

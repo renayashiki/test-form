@@ -1,0 +1,128 @@
+/* =========================================
+   Sanitize.css - 基本リセット + 安全初期化
+   -----------------------------------------
+   ・Normalizeより軽量で安全
+   ・Bootstrap/Tailwind併用可
+   ・要素間margin消去、余白統一済み
+   -----------------------------------------
+   Version: stable 2025-10
+========================================= */
+
+/* 1. 基本設定 */
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+/* 2. HTML5要素の表示統一 */
+article, aside, figcaption, figure, footer, header, hgroup, main, nav, section {
+    display: block;
+}
+
+/* 3. html, bodyの初期化 */
+html {
+    line-height: 1.15; /* IE対応 */
+    -webkit-text-size-adjust: 100%; /* Safariの文字サイズ調整無効化 */
+    -moz-tab-size: 4;
+    tab-size: 4;
+    scroll-behavior: smooth;
+}
+body {
+    margin: 0;
+    font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    color: #333;
+    line-height: 1.6;
+    background-color: #fff;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* 4. 見出し・段落・テキスト要素 */
+h1, h2, h3, h4, h5, h6, p, figure, blockquote, dl, dd {
+    margin: 0;
+    font-weight: normal;
+}
+h1, h2, h3, h4, h5, h6 {
+    line-height: 1.3;
+}
+
+/* 5. リンク・ボタン共通 */
+a {
+    background-color: transparent;
+    color: inherit;
+    text-decoration: none;
+}
+a:hover, a:focus {
+    text-decoration: none;
+}
+button {
+    cursor: pointer;
+    background: none;
+    border: none;
+    color: inherit;
+}
+
+/* 6. リスト */
+ul, ol {
+    list-style: none;
+    padding-left: 0;
+}
+
+/* 7. テーブル */
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+    width: 100%;
+}
+th {
+    text-align: left;
+    font-weight: normal;
+}
+
+/* 8. 画像・メディア */
+img, picture, video, canvas, svg {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    vertical-align: middle;
+    border: 0;
+}
+
+/* 9. フォーム要素 */
+input, button, textarea, select {
+    font: inherit;
+    color: inherit;
+    margin: 0;
+    line-height: 1.15;
+}
+input[type="number"]::-webkit-inner-spin-button, 
+input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+textarea {
+    overflow: auto;
+    resize: vertical;
+}
+select {
+    background-color: transparent;
+}
+
+/* 10. その他 */
+abbr[title] {
+    text-decoration: underline dotted;
+}
+hr {
+    border: none;
+    border-top: 1px solid #ccc;
+    margin: 1em 0;
+}
+
+/* 11. アクセシビリティ補助 */
+:focus {
+    outline: 2px solid #7c6e65;
+    outline-offset: 2px;
+}
+[hidden] {
+    display: none !important;
+}

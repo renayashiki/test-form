@@ -1,0 +1,226 @@
+/* ================================================= */
+/* 1. 基本設定（Body, App Layout, Header） */
+/* ================================================= */
+
+body {
+    /* 修正点1: 全体背景の調整 */
+    font-family: 'Inter', sans-serif;
+    color: #333;
+    background-color: #F4F4F4; /* デフォルトの背景色 */
+}
+
+/* ヘッダーのスタイル */
+.header-area {
+    width: 100%;
+    border-bottom: 1px solid #E0E0E0;
+    padding: 20px 5%;
+    text-align: left;
+    background-color: #FFFFFF;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* 修正点: FashionablyLateのフォント調整 */
+.app-name {
+    font-size: 24px;
+    font-family: serif; 
+    font-weight: normal;
+    color: #7A6A6A; /* 茶色 */
+    letter-spacing: 0.1em;
+}
+
+/* 修正点1: ヘッダーのLogoutボタンを完全に非表示にする */
+.header-actions {
+    display: none !important; 
+}
+
+/* 修正点3: フォーム全体の上部パディングを減らし、FashionablyLateに近づける */
+.contact-page {
+    padding: 40px 0; /* 80pxから40pxに減らす */
+    background-color: #FFFFFF;
+    min-height: 100vh;
+    box-sizing: border-box;
+}
+
+/* ================================================= */
+/* 2. フォーム共通スタイル */
+/* ================================================= */
+
+/* 修正点3: Contactタイトルのフォント調整 */
+.page-title {
+    text-align: center;
+    font-size: 28px;
+    color: #7A6A6A;
+    margin-bottom: 20px; /* indexのパディングを減らしたため、マージンも調整 */
+    font-weight: normal;
+    font-family: serif;
+}
+
+.form-box {
+    width: 100%;
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.form-group {
+    margin-bottom: 30px;
+}
+
+.form-group-wrap {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 8px;
+}
+
+/* ラベルのスタイル */
+.form-group-wrap label {
+    width: 35%;
+    font-size: 14px;
+    color: #7A6A6A;
+    padding-top: 10px;
+    box-sizing: border-box;
+    font-weight: normal;
+}
+
+.form-group-item {
+    width: 65%;
+    box-sizing: border-box;
+    display: flex;
+}
+
+/* 修正点1: 入力フィールドの背景色と枠線 */
+.form-group-item input[type="text"],
+.form-group-item input[type="email"],
+.form-group-item input[type="tel"],
+.form-group-item select,
+.form-group-item textarea {
+    width: 100%;
+    padding: 8px 10px; /* パディングを調整 */
+    border: 1px solid #E0E0E0; /* 枠線を追加 */
+    border-radius: 4px; /* 角を丸く */
+    background-color: #F4F4F4; /* 薄いグレーの背景色 */
+    font-size: 14px;
+    color: #333;
+    box-shadow: none;
+    outline: none;
+    transition: border-color 0.3s;
+    box-sizing: border-box;
+}
+
+.form-group-item textarea {
+    resize: none;
+    height: 100px;
+}
+
+/* 修正点4: placeholderとselect要素の文字色を透けた色にする */
+.form-group-item input::placeholder,
+.form-group-item textarea::placeholder {
+    color: #A9A9A9 !important;
+    opacity: 1 !important;
+}
+
+/* select要素自体のデフォルト文字色を透けた色に */
+.form-group-item select {
+    color: #A9A9A9 !important; /* 初期値を透けた色に強制 */
+}
+
+/* select要素で値が選択された場合のみ黒文字に戻す */
+.form-group-item select:valid {
+    color: #333 !important;
+}
+
+
+.error-message {
+    color: #FF0000;
+    font-size: 12px;
+    margin-top: 5px;
+    text-align: right;
+    width: 65%;
+    margin-left: 35%;
+}
+
+.required-mark {
+    color: #FF0000;
+    font-size: 12px;
+    margin-left: 5px;
+}
+
+.btn-submit {
+    display: block;
+    width: 100%;
+    max-width: 120px;
+    margin: 40px auto 0;
+    padding: 12px 20px;
+    background-color: #333; /* ★黒に変更 */
+    color: #FFFFFF;
+    border: none;
+    border-radius: 4px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.btn-submit:hover {
+    background-color: #555; 
+}
+
+/* ================================================= */
+/* 3. 個別フォーム要素の調整 */
+/* ================================================= */
+
+.input-pair {
+    gap: 10px;
+}
+.input-pair > .form-group-item {
+    width: 50%;
+}
+
+/* 電話番号（Tel）の入力欄とハイフン */
+.tel-input-pair {
+    display: flex;
+    align-items: center;
+}
+.tel-input-pair .tel-input-field {
+    width: calc((100% - 30px) / 3); 
+}
+.tel-separator {
+    color: #333;
+    font-size: 14px;
+    margin: 0 5px;
+}
+
+
+/* 修正点2: 性別ラジオボタンの標準設定に戻す */
+.gender-radio-group {
+    display: flex;
+    gap: 20px;
+    padding-top: 8px;
+}
+.gender-radio-group label {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    color: #333;
+    font-size: 14px;
+}
+
+/* 修正点2: ラジオボタンのサイズを調整し、青いアウトラインを消す */
+.gender-radio-group input[type="radio"] {
+    width: 14px; /* サイズを標準に近く小さく */
+    height: 14px;
+    margin-right: 6px;
+    flex-shrink: 0;
+}
+/* 選択時の青いアウトライン（フォーカスリング）を無効化 */
+.gender-radio-group input[type="radio"]:focus {
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+
+/* お問い合わせの種類 (Select Box) のカスタム矢印を削除し、標準に戻す */
+.form-group-item:not(.input-pair):has(select)::after {
+    content: none !important;
+}

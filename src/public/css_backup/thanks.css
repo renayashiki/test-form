@@ -1,0 +1,39 @@
+/* ====================================
+   サンクスページ固有スタイル
+   ==================================== */
+.thank-you-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 70vh;
+    text-align: center;
+}
+
+.thank-you-container .main {
+    max-width: 400px; /* サンクスページの幅 */
+    padding: 50px;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.thank-you-container .message {
+    font-size: 24px;
+    margin-bottom: 30px;
+    color: #333; /* 文字色 */
+}
+
+.thank-you-container .home-button {
+    display: block;
+    width: 60%; /* HOMEボタンの幅 */
+    margin: 0 auto; /* 中央寄せ */
+    padding: 12px 0;
+    text-decoration: none;
+    background: #7c6e65; /* 茶色 */
+    color: white;
+    border-radius: 4px;
+    transition: background 0.3s;
+}
+.thank-you-container .home-button:hover {
+    background: #5e5149;
+}

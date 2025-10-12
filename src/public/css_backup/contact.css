@@ -1,0 +1,212 @@
+/* ===============================
+   contact.css（確認画面用 最終版）
+   =============================== */
+
+/* ページ全体：背景ベージュ、中央に白カード */
+body {
+    background-color: #f8f5f2;
+    margin: 0;
+    font-family: "Hiragino Kaku Gothic ProN", Meiryo, sans-serif;
+    color: #7c6e65;
+}
+
+/* 外側：中央寄せ */
+.confirm-container {
+    display: flex;
+    justify-content: center;
+    padding: 80px 0;
+}
+
+/* 中央白ボックス */
+.confirm-box {
+    background-color: #ffffff;
+    width: 800px;
+    padding: 50px 60px;
+    border-radius: 6px;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+    box-sizing: border-box;
+}
+
+/* タイトル */
+.confirm-box h2 {
+    text-align: center;
+    color: #7c6e65;
+    font-size: 28px;
+    font-family: "Times New Roman", serif;
+    margin-bottom: 40px;
+}
+
+/* テーブル */
+.confirm-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 40px;
+    font-size: 15px;
+}
+
+.confirm-table th {
+    width: 25%;
+    background-color: #7c6e65;
+    color: #fff;
+    text-align: left;
+    padding: 12px 18px;
+    font-weight: normal;
+    vertical-align: top;
+    box-sizing: border-box;
+}
+
+.confirm-table td {
+    background-color: #ffffff;
+    color: #7c6e65;
+    border-bottom: 1px solid #ddd8d3;
+    padding: 12px 18px;
+    vertical-align: top;
+}
+
+/* テーブル全体を詰める */
+.confirm-table th,
+.confirm-table td {
+    line-height: 1.4;
+}
+
+/* お問い合わせ内容の長文対応 */
+.confirm-table td.confirm-detail {
+    white-space: pre-wrap;
+    line-height: 1.6;
+}
+
+/* ボタン配置 */
+.confirm-buttons {
+    text-align: center;
+    margin-top: 20px;
+}
+
+/* 共通ボタン */
+.confirm-buttons .btn {
+    padding: 10px 28px;
+    border-radius: 6px;
+    font-size: 14px;
+    cursor: pointer;
+    margin: 0 10px;
+}
+
+/* 送信ボタン */
+.btn-send {
+    background-color: #7c6e65;
+    color: #fff;
+    border: none;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.btn-send:hover {
+    background-color: #6b5c54;
+}
+
+/* 修正ボタン（下線のみ） */
+.btn-edit {
+    background: transparent;
+    color: #7c6e65;
+    border: none;
+    text-decoration: underline;
+}
+
+.btn-edit:hover {
+    color: #5a514c;
+}
+
+/* スマホ用（768px以下） */
+@media (max-width: 768px) {
+    .confirm-box {
+        width: 90%;
+        padding: 30px 20px;
+    }
+
+    .confirm-table th,
+    .confirm-table td {
+        display: block;
+        width: 100%;
+    }
+
+    .confirm-buttons .btn {
+        display: block;
+        width: 100%;
+        margin-bottom: 10px;
+    }
+}
+/* ==========================
+   確認画面レイアウト修正版
+========================== */
+
+.confirm-container {
+    max-width: 900px;
+    margin: 60px auto;
+    padding: 40px 50px;
+    background-color: #f9f6f3;
+    border-radius: 8px;
+}
+
+.confirm-container h2 {
+    text-align: center;
+    font-size: 24px;
+    color: #6b5a50;
+    margin-bottom: 30px;
+}
+
+/* 表全体 */
+.confirm-table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #fff;
+    box-shadow: 0 0 4px rgba(0,0,0,0.05);
+}
+
+/* 左の項目セル */
+.confirm-table th {
+    width: 25%;
+    background-color: #e7dcd2;
+    color: #6b5a50;
+    text-align: left;
+    padding: 12px 18px;
+    border: 1px solid #ddd;
+    font-weight: 600;
+    vertical-align: middle;
+    white-space: nowrap;
+}
+
+/* 右の内容セル */
+.confirm-table td {
+    width: 75%;
+    background-color: #fff;
+    color: #333;
+    border: 1px solid #ddd;
+    padding: 12px 18px;
+    vertical-align: middle;
+}
+
+/* ボタンエリア */
+.confirm-buttons {
+    text-align: center;
+    margin-top: 40px;
+}
+
+.inline-form {
+    display: inline-block;
+    margin: 0 15px;
+}
+
+.back-btn,
+.submit-btn {
+    background-color: #a58a79;
+    color: #fff;
+    border: none;
+    padding: 10px 40px;
+    border-radius: 4px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.back-btn:hover,
+.submit-btn:hover {
+    background-color: #8b7364;
+}

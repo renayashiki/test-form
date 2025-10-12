@@ -13,6 +13,18 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // \App\Models\User::factory(10)->create();
+        // 1) カテゴリを先に作る（外部キー先）
+        $this->call(\Database\Seeders\CategorySeeder::class);
+
+        // 2) 管理者ユーザーを作る
+        $this->call(\Database\Seeders\AdminUserSeeder::class);
+
+        $this->call([
+            CategorySeeder::class,
+            AdminUserSeeder::class,
+        ]);
+        
+        // 3) ダミーのcontactsを作る
+        \App\Models\Contact::factory(35)->create();
     }
 }
