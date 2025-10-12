@@ -1,13 +1,12 @@
-{{-- resources/views/layouts/partials/head.blade.php --}}
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>@yield('title', 'FashionablyLate')</title>
+{{-- 共通 <head> セクション --}}
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    {{-- 🔹 全ページ共通CSS --}}
-    <link rel="stylesheet" href="{{ asset('css/sanitize.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/common.css') }}">
+{{-- 共通CSS --}}
+<link rel="stylesheet" href="{{ asset('css/sanitize.css') }}">
+<link rel="stylesheet" href="{{ asset('css/common.css') }}">
 
-    {{-- 🔹 ページ専用CSS（各ページで上書き可） --}}
-    @yield('css')
-</head>
+{{-- ページ・レイアウトごとの個別CSS --}}
+@yield('css')
+
+<title>@yield('title', 'FashionablyLate')</title>
