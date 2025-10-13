@@ -1,0 +1,35 @@
+[90m= [39m[
+    {#5220
+      +"[1mField[22m": "[32mid[39m",
+      +"[1mType[22m": "[32mbigint unsigned[39m",
+      +"[1mNull[22m": "[32mNO[39m",
+      +"[1mKey[22m": "[32mPRI[39m",
+      +"[1mDefault[22m": [36mnull[39m,
+      +"[1mExtra[22m": "[32mauto_increment[39m",
+    },
+    {#5219
+      +"[1mField[22m": "[32mcontent[39m",
+      +"[1mType[22m": "[32mvarchar(255)[39m",
+      +"[1mNull[22m": "[32mNO[39m",
+      +"[1mKey[22m": "",
+      +"[1mDefault[22m": [36mnull[39m,
+      +"[1mExtra[22m": "",
+    },
+    {#5218
+      +"[1mField[22m": "[32mcreated_at[39m",
+      +"[1mType[22m": "[32mtimestamp[39m",
+      +"[1mNull[22m": "[32mYES[39m",
+      +"[1mKey[22m": "",
+      +"[1mDefault[22m": [36mnull[39m,
+      +"[1mExtra[22m": "",
+    },
+    {#5217
+      +"[1mField[22m": "[32mupdated_at[39m",
+      +"[1mType[22m": "[32mtimestamp[39m",
+      +"[1mNull[22m": "[32mYES[39m",
+      +"[1mKey[22m": "",
+      +"[1mDefault[22m": [36mnull[39m,
+      +"[1mExtra[22m": "",
+    },
+  ]
+

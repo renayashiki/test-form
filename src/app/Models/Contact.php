@@ -9,17 +9,24 @@ class Contact extends Model
 {
     use HasFactory;
 
+    protected $table = 'contacts';
+
+    // ← ここが超重要！！
     protected $fillable = [
-        'name',
+        'category_id',
+        'last_name',
+        'first_name',
+        'gender',
         'email',
         'tel',
-        'body',
+        'address',
+        'building',
+        'detail',
     ];
 
-    // app/Models/Contact.php
+    // Categoryとのリレーション（あれば）
     public function category()
     {
         return $this->belongsTo(Category::class);
     }
 }
-

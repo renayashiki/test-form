@@ -1,149 +1,165 @@
-/* ===== ベース ===== */
+/* ===== 全体ベース ===== */
 body {
-    background: #fff;
-    font-family: "Noto Sans JP", sans-serif;
-    color: #3f2a22;
+    background-color: #ffffff;
+    font-family: 'Noto Serif JP', serif;
+    color: #4b3c2f;
     margin: 0;
-}
-
-/* ===== ヘッダー ===== */
-.admin-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background: #f6f2ec;
-    padding: 10px 40px;
-    border-bottom: 2px solid #d1bfa8;
-}
-
-.site-title {
-    font-size: 24px;
-    font-weight: 600;
-    margin-right: 15px;
-}
-
-.admin-title {
-    font-size: 20px;
-    color: #8b6b5a;
-    margin-top: 5px;
-}
-
-.logout-btn {
-    background: #8b6b5a;
-    color: #fff;
-    border: none;
-    padding: 6px 14px;
-    border-radius: 6px;
-    cursor: pointer;
-}
-
-/* ===== コンテンツ ===== */
-.admin-container {
-    width: 90%;
-    margin: 40px auto;
-}
-
-.search-form {
-    display: flex;
-    gap: 10px;
-    margin-bottom: 20px;
-    align-items: center;
-}
-
-.search-form input,
-.search-form select {
-    border: 1px solid #d1bfa8;
-    padding: 6px 8px;
-    border-radius: 5px;
-}
-
-.search-btn {
-    background: #8b6b5a;
-    color: #fff;
-    border: none;
-    padding: 6px 14px;
-    border-radius: 6px;
-    cursor: pointer;
-}
-
-.reset-link,
-.export-btn {
-    background: #d1bfa8;
-    color: #fff;
-    border: none;
-    padding: 6px 14px;
-    border-radius: 6px;
-    text-decoration: none;
-    cursor: pointer;
-}
-
-.export-btn {
-    background: #8b6b5a;
-}
-
-/* ===== テーブル ===== */
-.contact-table {
-    width: 100%;
-    border-collapse: collapse;
-    border: 1px solid #d1bfa8;
-}
-
-.contact-table th {
-    background: #f6f2ec;
-    color: #3f2a22;
-    padding: 10px;
-    border-bottom: 2px solid #d1bfa8;
-}
-
-.contact-table td {
-    border-bottom: 1px solid #d1bfa8;
-    padding: 10px;
-}
-
-.text-truncate {
-    max-width: 150px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
-.detail-btn {
-    background: #8b6b5a;
-    color: #fff;
-    border: none;
-    padding: 5px 10px;
-    border-radius: 6px;
-    cursor: pointer;
-}
-
-/* ===== ページネーション ===== */
-.pagination-wrapper {
-    display: flex;
-    justify-content: center;
-    margin-top: 30px;
-}
-
-.pagination-wrapper nav ul {
-    display: flex;
-    list-style: none;
     padding: 0;
 }
 
-.pagination-wrapper nav ul li {
-    margin: 0 5px;
+/* ===== Header（ロゴ部分＋区切り線） ===== */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 25px 40px 10px;
+    border-bottom: 1px solid #dcdcdc;
 }
 
-.pagination-wrapper nav ul li a,
-.pagination-wrapper nav ul li span {
-    display: block;
-    padding: 6px 10px;
-    border: 1px solid #d1bfa8;
-    color: #3f2a22;
-    text-decoration: none;
-    border-radius: 4px;
+header h1 {
+    font-size: 28px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
 }
 
-.pagination-wrapper nav ul li.active span {
-    background: #8b6b5a;
+.logout-btn {
+    background-color: #9d8063;
     color: #fff;
+    border: none;
+    border-radius: 3px;
+    padding: 7px 16px;
+    font-size: 14px;
+    cursor: pointer;
+}
+.logout-btn:hover {
+    background-color: #8b6f56;
+}
+
+/* ===== タイトル ===== */
+.main-title {
+    text-align: center;
+    font-size: 22px;
+    font-weight: 500;
+    margin: 25px 0 35px;
+    color: #4b3c2f;
+}
+
+/* ===== コンテナ ===== */
+.admin-container {
+    max-width: 1050px;
+    margin: 0 auto;
+    padding: 0 30px 60px;
+}
+
+/* ===== 検索フォーム ===== */
+.search-form {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+    margin-bottom: 25px;
+}
+
+.search-form input[type="text"],
+.search-form select,
+.search-form input[type="date"] {
+    height: 38px;
+    padding: 0 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+    color: #4b3c2f;
+    flex: 1;
+    min-width: 150px;
+}
+
+.search-form input::placeholder {
+    color: #888;
+}
+
+/* 検索・リセット・エクスポートボタンの調整 */
+.search-btn,
+.reset-link,
+.export-btn {
+    height: 38px;
+    line-height: 38px;
+    border-radius: 4px;
+    padding: 0 18px;
+    font-size: 14px;
+    text-align: center;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.search-btn {
+    background-color: #9d8063;
+    color: #fff;
+}
+
+.reset-link {
+    background: none;
+    color: #9d8063;
+}
+
+.export-btn {
+    background-color: #9d8063;
+    color: #fff;
+    border: none;
+}
+
+/* ===== テーブル ===== */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    border: 1px solid #ddd;
+}
+
+th, td {
+    text-align: center;
+    padding: 12px 14px;
+    font-size: 14px;
+    border-bottom: 1px solid #e5e2dc;
+}
+
+th {
+    background-color: #9d8063;
+    color: #fff;
+    font-weight: 600;
+}
+
+/* ===== ページネーション ===== */
+.pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 25px;
+    gap: 6px;
+}
+
+.pagination li {
+    list-style: none;
+}
+
+.pagination a,
+.pagination span {
+    display: block;
+    padding: 6px 12px;
+    border: 1px solid #d3c8bb;
+    color: #4b3c2f;
+    border-radius: 3px;
+    text-decoration: none;
+    background-color: #fff;
+}
+
+.pagination a:hover {
+    background-color: #f1ece8;
+}
+
+.pagination .active span {
+    background-color: #9d8063;
+    color: #fff;
+    border-color: #9d8063;
 }
