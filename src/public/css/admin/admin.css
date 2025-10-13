@@ -1,374 +1,149 @@
-/* ================================== */
-/* ベースレイアウト */
-/* ================================== */
+/* ===== ベース ===== */
 body {
-    background-color: #ffffff;
-    margin: 0;
-    font-family: "Helvetica Neue", Arial, sans-serif;
-}
-.admin-header {
     background: #fff;
-    padding: 15px 40px;
-    border-bottom: 1px solid #bbb;
+    font-family: "Noto Sans JP", sans-serif;
+    color: #3f2a22;
+    margin: 0;
 }
-.admin-header__inner {
+
+/* ===== ヘッダー ===== */
+.admin-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    max-width: 1200px;
-    margin: 0 auto;
-    position: relative;
-    height: 32px;
-}
-.admin-header__logo {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol";
-    font-weight: normal;
-    font-size: 32px;
-    color: #7c6e65;
-    text-decoration: none;
-    margin: 0;
-    white-space: nowrap;
-}
-.logout-form {
-    margin-left: auto;
-    position: relative;
-    z-index: 10;
-}
-.logout-button {
-    background: #f6f6f6;
-    color: #7c6e65;
-    padding: 6px 14px;
-    border-radius: 3px;
-    border: 1px solid #d8cfc5;
-    cursor: pointer;
-    font-size: 13px;
-    transition: 0.3s;
-}
-.admin-main {
-    padding: 20px 20px 60px; 
-    max-width: 1200px;
-    margin: 0 auto;
-}
-.admin-dashboard-container h2 {
-    text-align: center;
-    font-size: 24px;
-    font-family: "Playfair Display", serif;
-    margin-bottom: 15px; 
-    color:#7c6e65;
-    font-weight: normal;
+    background: #f6f2ec;
+    padding: 10px 40px;
+    border-bottom: 2px solid #d1bfa8;
 }
 
-/* ================================== */
-/* 検索エリア */
-/* ================================== */
-.search-area {
-    margin-bottom: 20px; 
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    width: 100%;
+.site-title {
+    font-size: 24px;
+    font-weight: 600;
+    margin-right: 15px;
 }
+
+.admin-title {
+    font-size: 20px;
+    color: #8b6b5a;
+    margin-top: 5px;
+}
+
+.logout-btn {
+    background: #8b6b5a;
+    color: #fff;
+    border: none;
+    padding: 6px 14px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+/* ===== コンテンツ ===== */
+.admin-container {
+    width: 90%;
+    margin: 40px auto;
+}
+
 .search-form {
     display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
     align-items: center;
-    justify-content: flex-start; 
-    gap: 0; 
-    flex-wrap: nowrap;
-    width: 100%; /* 親コンテナ幅に合わせる */
 }
 
-/* フォーム要素と間隔の調整 */
-.search-form > * {
-    margin-right: 15px; 
-}
-.search-form > button:last-child {
-    margin-right: 0;
-}
-
-.search-form input[type="text"] {
-    flex-grow: 1; 
-    min-width: 250px; /* 最小幅を維持 */
-    max-width: none;
-    width: auto;
-    flex-shrink: 1; 
-}
-.search-form select[name="gender"] {
-    width: 80px; 
-    flex-shrink: 0;
-}
-.search-form select[name="category_id"] {
-    width: 230px; 
-    flex-shrink: 0;
-}
-.search-form input[type="date"] {
-    width: 130px; 
-    flex-shrink: 0;
-}
-
-/* フォーム共通スタイル */
-.search-form input[type="text"],
-.search-form select,
-.search-form input[type="date"] {
-    background-color: #f6f6f6; 
-    padding: 10px 12px;
-    border: 1px solid #d8cfc5;
-    border-radius: 3px;
-    font-size: 14px;
-    color: #333;
-    height: 40px;
-    box-sizing: border-box;
-    appearance: none; 
-}
+.search-form input,
 .search-form select {
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23000' d='M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6z'/%3E%3C/svg%3E");
-    background-repeat: no-repeat;
-    background-position: right 8px center; 
-    background-size: 18px 18px; 
-    padding-right: 32px; 
+    border: 1px solid #d1bfa8;
+    padding: 6px 8px;
+    border-radius: 5px;
 }
-.search-button, .reset-button {
-    padding: 10px 18px;
-    height: 40px;
-    min-width: 80px;
-    box-sizing: border-box;
-    border-radius: 3px;
-    font-size: 14px;
-    cursor: pointer;
-    flex-shrink: 0;
-}
-.search-button {
-    background-color: #7c6e65;
-    color: white;
+
+.search-btn {
+    background: #8b6b5a;
+    color: #fff;
     border: none;
-}
-.reset-button {
-    background-color: #f6f6f6;
-    border: 1px solid #d8cfc5;
-    color: #7c6e65;
-    text-decoration: none;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-}
-/* エクスポートボタン（list-meta内に移動） */
-.export-button {
-    background-color: #f6f6f6;
-    border: 1px solid #d8cfc5;
-    color: #7c6e65;
-    padding: 10px 15px;
+    padding: 6px 14px;
+    border-radius: 6px;
     cursor: pointer;
-    border-radius: 3px;
-    font-size: 14px;
 }
 
-/* ================================== */
-/* リストメタ（エクスポートとページネーションのラッパー） */
-/* ================================== */
-.list-meta {
-    display: flex; /* 横並びにする */
-    justify-content: space-between; /* 両端寄せ */
-    align-items: center;
-    margin-bottom: 10px; 
-    width: 100%;
+.reset-link,
+.export-btn {
+    background: #d1bfa8;
+    color: #fff;
+    border: none;
+    padding: 6px 14px;
+    border-radius: 6px;
+    text-decoration: none;
+    cursor: pointer;
 }
 
-
-/* ================================== */
-/* ページネーション (見本デザインに合わせる - 最強の打ち消し) */
-/* ================================== */
-
-/* ページネーション全体を囲むコンテナ */
-.pagination-container {
-    width: auto; 
+.export-btn {
+    background: #8b6b5a;
 }
 
-/* 件数表示（Showing X to Y of Z results）を完全に非表示にする */
-.pagination nav > div.hidden.sm\:flex-1 { 
-    display: none !important;
-}
-
-/* ページネーション全体（navタグ） */
-.pagination nav {
-    padding: 0 !important;
-    margin: 0 !important;
-}
-
-/* リンクと矢印が入っている外側のコンテナ (nav > div:last-child) */
-.pagination nav > div:last-child {
-    display: flex !important;
-    justify-content: flex-end !important; /* 右寄せを強制 */
-    align-items: center !important;
-    padding: 0 !important;
-    margin: 0 !important;
-}
-
-/* 💡【重要】ulを囲むdiv (nav > div:last-child > div) の縦並びを解除 */
-.pagination nav > div:last-child > div {
-    display: flex !important; /* Flexboxを強制 */
-    flex-direction: row !important; /* 横並びを明示的に強制 */
-    padding: 0 !important;
-    margin: 0 !important;
-}
-
-
-/* ページ番号のリスト（ulタグ）とリストアイテム（liタグ）のスタイルを強制リセット */
-.pagination ul {
-    display: flex !important; /* ulをFlexBoxにする */
-    list-style: none !important;
-    padding: 0 !important;
-    margin: 0 !important;
-}
-
-.pagination ul li {
-    /* **重要**：ul/liによる縦並びを確実にブロックし、横並びをサポート */
-    display: flex !important; 
-    flex-direction: row !important; /* ← 念のためliにもrowを明示的に追加 */
-    list-style: none !important;
-    margin: 0 !important;
-    padding: 0 !important;
-    flex-shrink: 0 !important; /* liが縮まないように */
-}
-
-
-/* 💡【究極の打ち消し】liにクラスが付与されていても強制的に横並びにする */
-.pagination li.flex-col, .pagination li.sm\:flex-col, .pagination li.md\:flex-col {
-    flex-direction: row !important;
-    display: flex !important;
-}
-.pagination li > span, .pagination li > a {
-    flex-direction: row !important;
-}
-/* -------------------- */
-
-
-/* ページ番号と矢印のリンク/spanのデザイン */
-.pagination a,
-.pagination span {
-    /* ページネーション内のすべてのリンクとスパン要素をボックスにする */
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    height: 30px !important;
-    width: 30px !important; /* 正方形にする */
-    font-size: 14px !important;
-    line-height: 1 !important;
-    margin: 0 1px !important; /* ページ番号間の間隔 */
-    border: 1px solid #d8cfc5 !important;
-    text-decoration: none !important;
-    border-radius: 3px !important;
-    background-color: white !important;
-    color: #7c6e65 !important;
-    transition: background-color 0.15s;
-    font-weight: normal !important;
-    padding: 0 !important;
-    box-sizing: border-box !important;
-}
-
-/* 現在のページ */
-.pagination span[aria-current="page"] {
-    background-color: #7c6e65 !important;
-    color: white !important;
-    border-color: #7c6e65 !important;
-    font-weight: bold !important;
-}
-
-/* 矢印（Previous/Next）のコンテナ */
-/* 矢印ボタンのデザイン */
-.pagination a[rel="prev"],
-.pagination a[rel="next"],
-.pagination span[aria-disabled="true"] {
-    border: 1px solid #d8cfc5 !important; 
-    background-color: white !important;
-    min-width: 20px !important; 
-    color: #7c6e65 !important;
-    width: 30px !important; /* 正方形にする */
-    padding: 0 !important;
-}
-
-/* 矢印内の要素（テキストやSVG）を非表示にする */
-.pagination a[rel="prev"] span,
-.pagination a[rel="next"] span,
-.pagination span[aria-disabled="true"] span,
-.pagination svg {
-    display: none !important;
-}
-
-/* 矢印の記号を明示的に指定 */
-.pagination a[rel="prev"]::before,
-.pagination span[aria-disabled="true"]:first-child::before {
-    content: '<'; /* 左矢印 */
-    display: block;
-    color: inherit;
-    font-weight: bold;
-    font-size: 14px; 
-}
-.pagination a[rel="next"]::before,
-.pagination span[aria-disabled="true"]:last-child::before {
-    content: '>'; /* 右矢印 */
-    display: block;
-    color: inherit;
-    font-weight: bold;
-    font-size: 14px; 
-}
-
-/* 矢印の無効化時の色 */
-.pagination span[aria-disabled="true"] {
-    color: #d8cfc5 !important;
-    border-color: #d8cfc5 !important;
-}
-
-
-/* ================================== */
-/* お問い合わせ一覧テーブル (変更なし) */
-/* ================================== */
-.contact-list table {
+/* ===== テーブル ===== */
+.contact-table {
     width: 100%;
     border-collapse: collapse;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-}
-.contact-list thead th {
-    background-color: #7c6e65;
-    color: white;
-    padding: 15px 12px;
-    text-align: left;
-    font-weight: bold;
-    font-size: 14px;
-    border: none;
-}
-.contact-list thead th:last-child {
-    text-align: center;
-}
-.contact-list tbody td {
-    background-color: #fff;
-    padding: 12px;
-    font-size: 14px;
-    color: #333;
-    border-bottom: 1px solid #eee;
-    border-right: none;
-}
-.contact-list tbody td:last-child {
-    text-align: center;
-}
-.detail-button {
-    background: none;
-    border: 1px solid #d2b6a4;
-    color: #d2b6a4;
-    padding: 5px 10px;
-    cursor: pointer;
-    border-radius: 3px;
-    font-size: 12px;
-    transition: 0.3s;
+    border: 1px solid #d1bfa8;
 }
 
-/* 💡【究極の打ち消し】liにクラスが付与されていても強制的に横並びにする */
-.pagination li.flex-col, .pagination li.sm\:flex-col, .pagination li.md\:flex-col {
-    flex-direction: row !important;
-    display: flex !important;
+.contact-table th {
+    background: #f6f2ec;
+    color: #3f2a22;
+    padding: 10px;
+    border-bottom: 2px solid #d1bfa8;
 }
-.pagination li > span, .pagination li > a {
-    flex-direction: row !important;
+
+.contact-table td {
+    border-bottom: 1px solid #d1bfa8;
+    padding: 10px;
+}
+
+.text-truncate {
+    max-width: 150px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.detail-btn {
+    background: #8b6b5a;
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+/* ===== ページネーション ===== */
+.pagination-wrapper {
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+}
+
+.pagination-wrapper nav ul {
+    display: flex;
+    list-style: none;
+    padding: 0;
+}
+
+.pagination-wrapper nav ul li {
+    margin: 0 5px;
+}
+
+.pagination-wrapper nav ul li a,
+.pagination-wrapper nav ul li span {
+    display: block;
+    padding: 6px 10px;
+    border: 1px solid #d1bfa8;
+    color: #3f2a22;
+    text-decoration: none;
+    border-radius: 4px;
+}
+
+.pagination-wrapper nav ul li.active span {
+    background: #8b6b5a;
+    color: #fff;
 }

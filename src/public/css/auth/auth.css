@@ -1,10 +1,10 @@
 /* ===== ベース ===== */
 :root{
-  --bg-beige: #f0ece6;
+  --bg-beige: #efe7e0d3;
   --text-brown: #817267;
   --muted-gray: #efebe9;
   --input-bg: #eeececc0;
-  --btn-brown: #817267;
+  --btn-brown: #7b6d62;
   --btn-brown-hover: #796c64;
   --placeholder: rgba(74,60,43,0.45);
 }
@@ -45,7 +45,7 @@ body {
   display:inline-block;
   padding:2px 10px;
   border-radius:2px;
-  background: #eeececc0;;
+  background: #eeececc0;
   color:var(--text-brown);
   border:1px solid rgba(103, 92, 85, 0.12);
   text-decoration:none;
@@ -58,18 +58,18 @@ body {
   display:flex;
   justify-content:center;
   align-items:flex-start;
-  padding-top:40px; /* ← 少し下に戻して自然に */
+  padding-top:40px;
 }
 
 /* ===== 認証モジュール ===== */
 .auth-container{
   text-align:center;
-  margin-top:10px; /* ← FashionablyLateとフォームの間を適度に */
+  margin-top:10px;
 }
 .auth-title{
   font-family:'Playfair Display', serif;
   font-size:22px;
-  margin: 10px 0 26px 0; /* ← 見出しとフォーム間の空間を調整 */
+  margin: 10px 0 26px 0;
   color:var(--text-brown);
   font-weight: lighter;
 }
@@ -77,15 +77,19 @@ body {
 /* ===== カード ===== */
 .auth-card{
   background:#fff;
-  width: 360px;
+  width: 380px;
+  height: 380px; /* ✅ 正方形に修正 */
   padding:36px;
   border-radius:4px;
   box-shadow: 0 6px 18px rgba(0,0,0,0.06);
   box-sizing:border-box;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
 }
 .auth-card.square{
   width: 380px;
-  height: 420px;
+  height: 380px; /* ✅ 同じく正方形 */
   display:flex;
   flex-direction:column;
   justify-content:center;
@@ -122,7 +126,7 @@ body {
 /* ===== ボタン ===== */
 .auth-btn{
   display:inline-block;
-  padding:5px 25px; /* ← ボタン幅をテキストに自然フィット */
+  padding:5px 25px;
   background: var(--btn-brown);
   color:#ffffffd5;
   border:none;

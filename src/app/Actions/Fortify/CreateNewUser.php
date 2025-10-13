@@ -27,7 +27,7 @@ class CreateNewUser implements CreatesNewUsers
         $rules = [
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'confirmed', 'min:8'],
+            'password' => ['required', 'string', 'min:8'],
         ];
 
         $messages = [
@@ -36,7 +36,6 @@ class CreateNewUser implements CreatesNewUsers
             'email.email' => 'メールアドレスはメール形式で入力してください。',
             'email.unique' => 'このメールアドレスは既に使用されています。',
             'password.required' => 'パスワードを入力してください。',
-            'password.confirmed' => 'パスワード（確認）が一致しません。',
             'password.min' => 'パスワードは8文字以上で入力してください。',
         ];
 

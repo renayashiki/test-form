@@ -4,84 +4,63 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Contact;
+use App\Models\Category;
 
 class ContactController extends Controller
 {
     /**
-     * 入力画面表示
+     * お問い合わせ入力ページ表示
      */
     public function index()
     {
-        return view('contact.index');
+        // カテゴリー一覧（セレクトボックス用）
+        $categories = Category::all();
+
+        return view('contact.index', compact('categories'));
     }
 
     /**
-     * 確認画面表示
+     * 確認ページ表示
      */
     public function confirm(Request $request)
     {
-        // ✅ バリデーション（見本の機能構造ルールに準拠）
+        // バリデーション
         $validated = $request->validate([
-            'name'       => 'required|string|max:100',
-            'email'      => 'required|email|max:255',
-            'tel1'       => 'required|digits_between:1,4',
-            'tel2'       => 'required|digits_between:1,4',
-            'tel3'       => 'required|digits_between:1,4',
-            'body'       => 'required|string|max:1000',
-        ], [
-            'name.required'  => 'お名前を入力してください。',
-            'email.required' => 'メールアドレスを入力してください。',
-            'email.email'    => '有効なメールアドレスを入力してください。',
-            'tel1.required'  => '電話番号を入力してください。',
-            'tel2.required'  => '電話番号を入力してください。',
-            'tel3.required'  => '電話番号を入力してください。',
-            'body.required'  => 'お問い合わせ内容を入力してください。',
+            'last_name'   => 'required|string|max:255',
+            'first_name'  => 'required|string|max:255',
+            'gender'      => 'required|in:1,2,3',
+            'email'       => 'required|email|max:255',
+            'tel'         => 'required|string|max:20',
+            'address'     => 'required|string|max:255',
+            'building'    => 'nullable|string|max:255',
+            'category_id' => 'required|exists:categories,id',
+            'detail'      => 'required|string|max:120',
         ]);
 
-        // ✅ 確認画面で1つの電話番号として表示できるよう結合
-        $tel = $validated['tel1'] . $validated['tel2'] . $validated['tel3'];
-
-        // ✅ 入力内容をセッションに保存（戻ったときに保持）
-        $request->session()->put('contact_input', $validated + ['tel' => $tel]);
-
-        return view('contact.confirm', [
-            'input' => $validated,
-            'tel'   => $tel,
-        ]);
+        // 入力内容を保持して確認ページへ
+        return view('contact.confirm', compact('validated'));
     }
 
     /**
-     * 送信処理（確認画面 → 完了画面）
+     * サンクスページ表示 + データ保存
      */
-    public function send(Request $request)
+    public function thanks(Request $request)
     {
-        // セッションから入力情報を取得
-        $input = $request->session()->get('contact_input');
-
-        if (!$input) {
-            return redirect()->route('contact.index');
-        }
-
-        // ✅ データベース保存（モデル：App\Models\Contact）
-        Contact::create([
-            'name'  => $input['name'],
-            'email' => $input['email'],
-            'tel'   => $input['tel1'] . $input['tel2'] . $input['tel3'],
-            'body'  => $input['body'],
-        ]);
-
-        // ✅ セッションクリア
-        $request->session()->forget('contact_input');
+        // hiddenで受け取る全データを保存
+        $contact = new Contact();
+        $contact->fill($request->only([
+            'last_name',
+            'first_name',
+            'gender',
+            'email',
+            'tel',
+            'address',
+            'building',
+            'category_id',
+            'detail'
+        ]));
+        $contact->save();
 
         return view('contact.thanks');
-    }
-
-    /**
-     * 管理画面一覧（既存維持）
-     */
-    public function adminIndex()
-    {
-        $contacts = Contact::latest()->paginate(10);
-        return view('admin.index', compact('contacts'));
     }
 }

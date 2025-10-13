@@ -15,4 +15,11 @@ class Contact extends Model
         'tel',
         'body',
     ];
+
+    // app/Models/Contact.php
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
 }
+
