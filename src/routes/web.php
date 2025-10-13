@@ -32,3 +32,18 @@ Route::prefix('admin')->group(function () {
     Route::delete('/contacts/{contact}', [AdminController::class, 'destroy'])->name('admin.destroy');
     Route::post('/contacts/export', [AdminController::class, 'export'])->name('admin.export');
 });
+
+// ======== トップページ ========
+Route::get('/', function () {
+    return view('welcome'); // 必要なら 'home' に変更可
+})->name('home');
+
+// ======== /admin → /admin/contacts にリダイレクト ========
+Route::get('/admin', function () {
+    return redirect()->route('admin.index');
+});
+
+// ======== /thanks → /contact/thanks に統一 ========
+Route::get('/thanks', function () {
+    return redirect()->route('contact.index');
+});

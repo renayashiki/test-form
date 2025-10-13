@@ -2,56 +2,61 @@
 
 namespace App\Providers;
 
+use Illuminate\Http\Request;
+use App\Http\Requests\LoginRequest;
+use App\Actions\Fortify\CreateNewUser;
 use Illuminate\Support\ServiceProvider;
 use Laravel\Fortify\Fortify;
-use App\Actions\Fortify\CreateNewUser;
-use App\Actions\Fortify\ResetUserPassword;
-use App\Actions\Fortify\UpdateUserPassword;
-use App\Actions\Fortify\UpdateUserProfileInformation;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Hash;
+
 
 class FortifyServiceProvider extends ServiceProvider
 {
-    /**
-     * Register services.
-     *
-     * @return void
-     */
-    public function register()
+    public function register(): void
     {
-        \Laravel\Fortify\Fortify::ignoreRoutes();
+        //
     }
 
-    /**
-     * Bootstrap services.
-     *
-     * @return void
-     */
-    public function boot()
+    public function boot(): void
     {
-        // ユーザー作成処理を定義
+        // Fortifyがルートを無視しないように設定
+        if (method_exists(Fortify::class, 'ignoreRoutes')) {
+            Fortify::ignoreRoutes(false);
+        }
+
+        // Fortifyのユーザー登録アクションを自前に設定（既に設定済みなら重複しない）
         Fortify::createUsersUsing(CreateNewUser::class);
 
-        // プロフィール更新処理
-        Fortify::updateUserProfileInformationUsing(UpdateUserProfileInformation::class);
+        // 認証時にフォームバリデーション（日本語メッセージ）を適用
+        Fortify::authenticateUsing(function (Request $request) {
+            // 明示的にバリデーション（LoginRequest と同等）
+            $validator = Validator::make($request->only('email', 'password'), [
+                'email' => ['required', 'email'],
+                'password' => ['required', 'string'],
+            ], [
+                'email.required' => 'メールアドレスを入力してください。',
+                'email.email' => 'メールアドレスはメール形式で入力してください。',
+                'password.required' => 'パスワードを入力してください。',
+            ]);
 
-        // パスワード更新処理
-        Fortify::updateUserPasswordsUsing(UpdateUserPassword::class);
+            if ($validator->fails()) {
+                // バリデーション失敗時は直ちに例外を投げることで通常のリダイレクト＆エラー表示へ
+                throw new \Illuminate\Validation\ValidationException($validator);
+            }
 
-        // パスワードリセット処理
-        Fortify::resetUserPasswordsUsing(ResetUserPassword::class);
+            $user = \App\Models\User::where('email', $request->email)->first();
 
-        // ログイン画面のビューを指定
-        Fortify::loginView(function () {
-            return view('auth.login');
+            if ($user && \Illuminate\Support\Facades\Hash::check($request->password, $user->password)) {
+                return $user;
+            }
+
+            return null;
         });
 
-        // 新規登録画面のビューを指定
-        Fortify::registerView(function () {
-            return view('auth.register');
-        });
+        // Fortifyが使用するビューを指定
+        Fortify::loginView(fn() => view('auth.login'));
+        Fortify::registerView(fn() => view('auth.register'));
     }
-
-
 }
-
-

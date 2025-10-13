@@ -1,33 +1,26 @@
-{{-- resources/views/auth/login.blade.php --}}
 @extends('layouts.app')
-
-@section('title', 'Login | FashionablyLate')
-
-@section('css')
-<link rel="stylesheet" href="{{ asset('css/auth/auth.css') }}">
-@endsection
-
-@section('header_button')
-    <a href="{{ route('register') }}" class="header-link">register</a>
-@endsection
 
 @section('content')
 <div class="auth-container">
     <h2 class="auth-title">Login</h2>
-    <div class="auth-card">
-        <form method="POST" action="{{ route('login') }}">
+
+    <div class="auth-card square">
+        <form method="POST" action="{{ route('login') }}" class="auth-form" novalidate>
             @csrf
-            <div class="form-group">
-                <label>メールアドレス</label>
-                <input type="email" name="email" value="{{ old('email') }}">
-                @error('email')<div class="error-message">{{ $message }}</div>@enderror
+
+            <div class="form-row">
+                <label for="email">メールアドレス</label>
+                <input id="email" type="email" name="email" value="{{ old('email') }}" placeholder="例：test@example.com" required autofocus>
+                @error('email') <p class="error-message">{{ $message }}</p> @enderror
             </div>
-            <div class="form-group">
-                <label>パスワード</label>
-                <input type="password" name="password">
-                @error('password')<div class="error-message">{{ $message }}</div>@enderror
+
+            <div class="form-row">
+                <label for="password">パスワード</label>
+                <input id="password" type="password" name="password" placeholder="例：coachtech06" required>
+                @error('password') <p class="error-message">{{ $message }}</p> @enderror
             </div>
-            <button type="submit" class="btn-submit">ログイン</button>
+
+            <button type="submit" class="auth-btn">ログイン</button>
         </form>
     </div>
 </div>

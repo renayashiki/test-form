@@ -1,72 +1,75 @@
-/* public/css/common.css - 共通の最小スタイル（ヘッダー周り等） */
-
-/* 全体のフォント・ベース色は各ページで上書き可 */
-:root {
-    --brand-brown: #7c6e65;
-    --muted: #d8cfc5;
+body.beige-page {
+    background-color: #f3ede7;
+    font-family: "Hiragino Sans", "Noto Sans JP", sans-serif;
+    color: #4a3b2a;
 }
 
-body {
-    margin: 0;
-    font-family: "Hiragino Kaku Gothic ProN", "Meiryo", "Helvetica Neue", Arial, sans-serif;
-    color: #333;
-    background-color: #f3ede7; /* デフォルト（auth 系の背景に使われる） — contact 系は個別で白に上書き */
-}
-
-/* ヘッダー（共通） */
+/* ======================
+   Header
+====================== */
 .site-header {
-    background: #fff;
-    border-bottom: 1px solid #eee;
-}
-.header-inner {
-    max-width: 1100px;
-    margin: 0 auto;
-    padding: 16px 20px;
+    width: 100%;
+    padding: 20px 60px;
     display: flex;
-    align-items: center;
     justify-content: center;
+    align-items: center;
     position: relative;
 }
-.logo-link {
-    font-size: 28px;
-    color: var(--brand-brown);
-    text-decoration: none;
-    font-weight: normal;
-    font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+
+.header-inner {
+    width: 100%;
+    max-width: 1200px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
-.header-right {
+
+.header-logo {
+    font-size: 24px;
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+
+.header-link-area {
     position: absolute;
-    right: 20px;
-    top: 50%;
-    transform: translateY(-50%);
+    right: 60px;
 }
 
-/* header のリンク見た目 */
-.header-right .header-link {
+.header-btn {
     display: inline-block;
-    padding: 6px 12px;
-    border-radius: 3px;
-    font-size: 13px;
-    background: #f6f6f6;
-    color: var(--brand-brown);
-    border: 1px solid var(--muted);
+    padding: 8px 24px;
+    border: 1px solid rgba(74, 59, 42, 0.3);
+    background-color: rgba(255, 255, 255, 0.4);
+    color: rgba(74, 59, 42, 0.8);
+    border-radius: 8px;
     text-decoration: none;
+    font-size: 14px;
+    transition: 0.2s;
 }
 
-/* メインの基本余白 */
-.main {
-    max-width: 1100px;
-    margin: 0 auto;
-    padding: 24px;
+.header-btn:hover {
+    background-color: rgba(255, 255, 255, 0.7);
 }
 
-/* 小さなユーティリティ */
-.text-center { text-align: center; }
-.btn {
-    display: inline-block;
-    padding: 10px 20px;
-    border-radius: 4px;
-    cursor: pointer;
-    text-decoration: none;
-    border: none;
+/* ======================
+   Main content
+====================== */
+.main-content {
+    min-height: calc(100vh - 80px);
+}
+/* ======================
+   Alert Message
+====================== */
+.alert-box {
+    margin-bottom: 20px;
+    border-radius: 10px;
+    padding: 12px 15px;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+.alert-error {
+    background-color: rgba(255, 0, 0, 0.08);
+    border: 1px solid rgba(255, 0, 0, 0.2);
+    color: #b94a48;
 }

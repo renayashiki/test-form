@@ -1,38 +1,154 @@
-/* public/css/auth/auth.css — login/register */
+/* ===== ベース ===== */
+:root{
+  --bg-beige: #f0ece6;
+  --text-brown: #817267;
+  --muted-gray: #efebe9;
+  --input-bg: #eeececc0;
+  --btn-brown: #817267;
+  --btn-brown-hover: #796c64;
+  --placeholder: rgba(74,60,43,0.45);
+}
 
 body {
-    background-color: #f8f5f2; /* ベージュ系（auth 系） */
-    color: #4b4039;
+  margin: 0;
+  font-family: 'Noto Sans JP', sans-serif;
+  background: var(--bg-beige);
+  color: var(--text-brown);
 }
 
-.auth-container {
-    max-width: 480px;
-    margin: 40px auto;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+/* ===== ヘッダー ===== */
+.auth-header{
+  background: #ffffff;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
 }
-.auth-title {
-    font-size: 24px;
-    color: #7c6e65;
-    margin-bottom: 24px;
+.auth-header-inner{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  position:relative;
+  padding:18px 60px;
 }
-.auth-card {
-    background: #fff;
-    width: 100%;
-    padding: 40px;
-    border-radius: 8px;
-    box-shadow: 0 6px 12px rgba(0,0,0,0.06);
+.auth-logo{
+  margin:0;
+  font-family:'Playfair Display', serif;
+  font-size:28px;
+  color:var(--text-brown);
+  font-weight: lighter;
 }
-.form-group { margin-bottom: 14px; text-align: left; }
-.form-group label { display:block; color: #7c6e65; margin-bottom:6px; }
-.form-group input { width:100%; padding:10px; border-radius:4px; border: 1px solid #e6e0da; background:#faf9f8; }
+.auth-nav{
+  position:absolute;
+  right:60px;
+  top:50%;
+  transform:translateY(-50%);
+}
+.auth-nav-btn{
+  display:inline-block;
+  padding:2px 10px;
+  border-radius:2px;
+  background: #eeececc0;;
+  color:var(--text-brown);
+  border:1px solid rgba(103, 92, 85, 0.12);
+  text-decoration:none;
+  font-size:14px;
+}
 
-.btn-submit {
-    width:100%;
-    padding:10px;
-    background: #7c6e65;
-    color:#fff;
-    border-radius:4px;
-    border:none;
+/* ===== メイン配置 ===== */
+.auth-main{
+  min-height: calc(100vh - 100px);
+  display:flex;
+  justify-content:center;
+  align-items:flex-start;
+  padding-top:40px; /* ← 少し下に戻して自然に */
+}
+
+/* ===== 認証モジュール ===== */
+.auth-container{
+  text-align:center;
+  margin-top:10px; /* ← FashionablyLateとフォームの間を適度に */
+}
+.auth-title{
+  font-family:'Playfair Display', serif;
+  font-size:22px;
+  margin: 10px 0 26px 0; /* ← 見出しとフォーム間の空間を調整 */
+  color:var(--text-brown);
+  font-weight: lighter;
+}
+
+/* ===== カード ===== */
+.auth-card{
+  background:#fff;
+  width: 360px;
+  padding:36px;
+  border-radius:4px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+  box-sizing:border-box;
+}
+.auth-card.square{
+  width: 380px;
+  height: 420px;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  padding:36px;
+}
+
+/* ===== フォーム ===== */
+.auth-form { display:block; }
+.form-row { margin-bottom:20px; text-align:left; }
+.auth-form label {
+  display:block;
+  margin-bottom:10px;
+  font-weight:normal;
+  color:var(--text-brown);
+}
+.auth-form input {
+  width:90%;
+  padding:10px 12px;
+  border-radius:2px;
+  border:none;
+  background: var(--input-bg);
+  font-size:14px;
+  box-sizing:border-box;
+  color:var(--text-brown);
+}
+
+/* ===== placeholder ===== */
+.auth-form input::placeholder{
+  color: var(--placeholder);
+  font-style: normal;
+  letter-spacing:0.2px;
+}
+
+/* ===== ボタン ===== */
+.auth-btn{
+  display:inline-block;
+  padding:5px 25px; /* ← ボタン幅をテキストに自然フィット */
+  background: var(--btn-brown);
+  color:#ffffffd5;
+  border:none;
+  border-radius:2px;
+  font-size:15px;
+  font-weight:normal;
+  cursor:pointer;
+  margin-top:18px;
+  transition: background 0.2s ease;
+}
+.auth-btn:hover{ background: var(--btn-brown-hover); }
+
+/* ===== エラーメッセージ ===== */
+.error-message{
+  color:#d9534f;
+  font-size:13px;
+  margin-top:6px;
+  margin-bottom:-6px;
+  display:block;
+}
+
+/* ===== スマホ調整 ===== */
+@media (max-width:480px){
+  .auth-header-inner{ padding:12px 20px; }
+  .auth-nav{ right:20px; }
+  .auth-card, .auth-card.square{ width:90%; height:auto; }
+  .auth-form input{ width:100%; }
+  .auth-btn{ width:auto; padding:10px 26px; }
 }

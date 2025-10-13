@@ -1,38 +1,32 @@
-{{-- resources/views/auth/register.blade.php --}}
 @extends('layouts.app')
-
-@section('title', 'Register | FashionablyLate')
-
-@section('css')
-<link rel="stylesheet" href="{{ asset('css/auth/auth.css') }}">
-@endsection
-
-@section('header_button')
-    <a href="{{ route('login') }}" class="header-link">login</a>
-@endsection
 
 @section('content')
 <div class="auth-container">
     <h2 class="auth-title">Register</h2>
+
     <div class="auth-card">
-        <form method="POST" action="{{ route('register') }}">
+        <form method="POST" action="{{ route('register') }}" class="auth-form" novalidate>
             @csrf
-            <div class="form-group">
-                <label>お名前</label>
-                <input type="text" name="name" value="{{ old('name') }}">
-                @error('name')<div class="error-message">{{ $message }}</div>@enderror
+
+            <div class="form-row">
+                <label for="name">お名前</label>
+                <input id="name" type="text" name="name" value="{{ old('name') }}" placeholder="例：山田　太郎" required autofocus>
+                @error('name') <p class="error-message">{{ $message }}</p> @enderror
             </div>
-            <div class="form-group">
-                <label>メールアドレス</label>
-                <input type="email" name="email" value="{{ old('email') }}">
-                @error('email')<div class="error-message">{{ $message }}</div>@enderror
+
+            <div class="form-row">
+                <label for="email">メールアドレス</label>
+                <input id="email" type="email" name="email" value="{{ old('email') }}" placeholder="例：test@example.com" required>
+                @error('email') <p class="error-message">{{ $message }}</p> @enderror
             </div>
-            <div class="form-group">
-                <label>パスワード</label>
-                <input type="password" name="password">
-                @error('password')<div class="error-message">{{ $message }}</div>@enderror
+
+            <div class="form-row">
+                <label for="password">パスワード</label>
+                <input id="password" type="password" name="password" placeholder="例：coachtech06" required>
+                @error('password') <p class="error-message">{{ $message }}</p> @enderror
             </div>
-            <button type="submit" class="btn-submit">登録</button>
+
+            <button type="submit" class="auth-btn">登録</button>
         </form>
     </div>
 </div>
