@@ -3,39 +3,47 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ContactController;
+use Illuminate\Support\Facades\Auth;
 
 /*
-|
-| 入力ページ: /
-| 確認ページ: /confirm
-| サンクスページ: /thanks
-| 管理画面: /admin
-| ユーザ登録ページ: /register（Fortify）
-| ログインページ: /login（Fortify）
-|
+|--------------------------------------------------------------------------
+| Web Routes
+|--------------------------------------------------------------------------
+| Fortifyが認証(login/register/logout)ルートを自動登録するため、Auth::routes()は使用しません。
 */
 
-// ======== TOP → お問い合わせフォーム入力ページ ========
+// 1. お問い合わせフォーム関連のルート（一般ユーザー向け）
+// ----------------------------------------------------
+
+// お問い合わせ入力画面 (GET /)
 Route::get('/', [ContactController::class, 'index'])->name('contact.index');
 
-// ======== お問い合わせ確認ページ ========
-Route::post('/confirm', [ContactController::class, 'confirm'])->name('contact.confirm');
+// 確認画面へPOST (POST /confirm)
+Route::post('/confirm', [ContactController::class, 'confirm'])->name('contact.confirm'); // 👈 これが必要です
 
-// ======== サンクスページ ========
-Route::post('/thanks', [ContactController::class, 'thanks'])->name('contact.thanks');
+// 修正ボタンを押して入力画面へ戻る処理
+Route::post('/confirm', [ContactController::class, 'back'])->name('contact.back');
 
-// ======== Fortify系ルートは自動生成される想定 ========
-// Auth::routes(); は Fortify使用時は不要
+// DBへ保存し完了画面へリダイレクト (POST /thanks)
+Route::post('/thanks', [ContactController::class, 'store'])->name('contact.store');
 
-// ======== /admin → /admin/contacts にリダイレクト ========
-Route::get('/admin', function () {
-    return redirect()->route('admin.index');
-})->middleware('auth');
+// 完了画面表示 (GET /thanks)
+Route::get('/thanks', [ContactController::class, 'thanks'])->name('contact.thanks');
 
-// ======== 管理画面 ========
-Route::prefix('admin')->middleware(['auth'])->group(function () {
+
+// 2. 管理画面関連のルート（認証ユーザー向け）
+// ----------------------------------------------------
+
+Route::middleware('auth')->prefix('admin')->group(function () {
+    // ログイン後のTOP (Fortifyリダイレクト先)
     Route::get('/contacts', [AdminController::class, 'index'])->name('admin.index');
-    Route::get('/contacts/{id}', [AdminController::class, 'show'])->name('admin.show');
-    Route::delete('/contacts/{id}', [AdminController::class, 'destroy'])->name('admin.destroy');
+
+    // CSVエクスポート
     Route::get('/contacts/export', [AdminController::class, 'export'])->name('admin.export');
+
+    // 詳細表示
+    Route::get('/contacts/{contact}', [AdminController::class, 'show'])->name('admin.show');
+
+    // 削除
+    Route::delete('/contacts/{contact}', [AdminController::class, 'destroy'])->name('admin.destroy');
 });

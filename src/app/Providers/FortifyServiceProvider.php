@@ -2,76 +2,72 @@
 
 namespace App\Providers;
 
-use Illuminate\Http\Request;
-use App\Http\Requests\LoginRequest;
 use App\Actions\Fortify\CreateNewUser;
+use App\Actions\Fortify\ResetUserPassword;
+use App\Actions\Fortify\UpdateUserPassword;
+use App\Actions\Fortify\UpdateUserProfileInformation;
+use Illuminate\Cache\RateLimiting\Limit;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\ServiceProvider;
 use Laravel\Fortify\Fortify;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Cache\RateLimiting\Limit;
-use Illuminate\Support\Facades\RateLimiter;
 
 class FortifyServiceProvider extends ServiceProvider
 {
+    /**
+     * Register any application services.
+     */
     public function register(): void
     {
         //
     }
 
+    /**
+     * Bootstrap any application services.
+     */
     public function boot(): void
     {
-        // ===============================
-        // 🔹 ログイン試行制限（Too Many Requests対策）
-        // ===============================
-        RateLimiter::for('login', function (Request $request) {
-            // 開発中は制限なし（本番では perMinute(10) などに戻す）
-            return Limit::perMinute(10)->by($request->ip());
+        $this->configureRateLimiting();
+
+        // ----------------------------------------------------
+        // Fortifyのビューバインディングを定義 (Register/Loginエラー対策)
+        // ----------------------------------------------------
+        Fortify::loginView(function () {
+            return view('auth.login');
         });
 
-        // Fortifyがルートを無視しないように設定
-        if (method_exists(Fortify::class, 'ignoreRoutes')) {
-            Fortify::ignoreRoutes(false);
-        }
+        Fortify::registerView(function () {
+            return view('auth.register');
+        });
 
-        // ユーザー登録アクション
+
+        // ----------------------------------------------------
+        // Fortifyのアクションを定義
+        // ----------------------------------------------------
         Fortify::createUsersUsing(CreateNewUser::class);
 
-        // ===============================
-        // 🔹 ログイン認証＋日本語バリデーション
-        // ===============================
-        Fortify::authenticateUsing(function (Request $request) {
-            $validator = Validator::make(
-                $request->only('email', 'password'),
-                [
-                    'email' => ['required', 'email'],
-                    'password' => ['required', 'string'],
-                ],
-                [
-                    'email.required' => 'メールアドレスを入力してください。',
-                    'email.email' => 'メールアドレスはメール形式で入力してください。',
-                    'password.required' => 'パスワードを入力してください。',
-                ]
-            );
+        Fortify::updateUserProfileInformationUsing(UpdateUserProfileInformation::class);
 
-            if ($validator->fails()) {
-                throw new \Illuminate\Validation\ValidationException($validator);
-            }
+        // 🚨 修正: キャッシュエラーを避けるため、パスワード更新・リセットのバインドを削除します
+        // Fortify::updateUserPasswordUsing(UpdateUserPassword::class); // 削除
+        // Fortify::resetUserPasswordUsing(ResetUserPassword::class);   // 削除
+    }
 
-            $user = \App\Models\User::where('email', $request->email)->first();
+    /**
+     * Configure the rate limiters for the application.
+     */
+    protected function configureRateLimiting(): void
+    {
+        RateLimiter::for('login', function (Request $request) {
+            $email = (string) $request->email;
 
-            if ($user && Hash::check($request->password, $user->password)) {
-                return $user;
-            }
-
-            return null;
+            return Limit::perMinute(5)->by($email . $request->ip());
         });
 
-        // ===============================
-        // 🔹 使用するBladeビュー指定
-        // ===============================
-        Fortify::loginView(fn() => view('auth.login'));
-        Fortify::registerView(fn() => view('auth.register'));
+        RateLimiter::for('two-factor', function (Request $request) {
+            return Limit::perMinute(5)->by(
+                $request->session()->get('login.id') . $request->ip()
+            );
+        });
     }
 }

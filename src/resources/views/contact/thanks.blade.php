@@ -1,19 +1,18 @@
-@extends('layouts.app')
+@extends('layouts.guest')
 
 @section('title', 'お問い合わせ完了')
 
 @section('css')
-<link rel="stylesheet" href="{{ asset('css/thanks.css') }}">
+<link rel="stylesheet" href="{{ asset('css/contact/thanks.css') }}">
 @endsection
 
 @section('content')
-<div class="thanks-container">
-    <div class="thanks-message">
-        <p>お問い合わせありがとうございました</p>
+    <div class="thanks-content">
+        <div class="thanks-background">Thank you</div>
+        
+        <div class="thanks-message-wrapper">
+            <p class="thanks-message">お問い合わせありがとうございました</p>
+            <a href="{{ route('contact.index') }}" class="home-button">HOME</a>
+        </div>
     </div>
-
-    <div class="thanks-button">
-        <a href="{{ url('/') }}">HOME</a>
-    </div>
-</div>
 @endsection

@@ -6,55 +6,90 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class ContactRequest extends FormRequest
 {
-    public function authorize(): bool
+    /**
+     * Determine if the user is authorized to make this request.
+     *
+     * @return bool
+     */
+    public function authorize()
     {
+        // 認証は不要
         return true;
     }
 
-    public function rules(): array
+    /**
+     * Get the validation rules that apply to the request.
+     *
+     * @return array
+     */
+    public function rules()
     {
         return [
-            'last_name'      => 'required|string|max:50',
-            'first_name'     => 'required|string|max:50',
-            'gender'         => 'required|integer|in:1,2,3',
-            'email'          => 'required|email|max:100',
-            'tel1'           => 'required|numeric|digits_between:2,5',
-            'tel2'           => 'required|numeric|digits_between:1,5',
-            'tel3'           => 'required|numeric|digits_between:3,4',
-            'address'        => 'required|string|max:200',
-            'building'       => 'nullable|string|max:200',
-            'category_id'    => 'required|integer|exists:categories,id',
-            'detail'         => 'required|string|max:120',
-        ];
-    }
-
-    public function messages(): array
-    {
-        return [
-            'last_name.required'   => '姓を入力してください',
-            'first_name.required'  => '名を入力してください',
-            'gender.required'      => '性別を選択してください',
-            'email.required'       => 'メールアドレスを入力してください',
-            'email.email'          => 'メールアドレスはメール形式で入力してください',
-            'tel1.required'        => '電話番号を入力してください',
-            'tel2.required'        => '電話番号を入力してください',
-            'tel3.required'        => '電話番号を入力してください',
-            'address.required'     => '住所を入力してください',
-            'category_id.required' => 'お問い合わせの種類を選択してください',
-            'detail.required'      => 'お問い合わせ内容を入力してください',
-            'detail.max'           => 'お問合せ内容は120文字以内で入力してください',
+            // お名前
+            'last_name' => ['required', 'string', 'max:255'],
+            'first_name' => ['required', 'string', 'max:255'],
+            // 性別
+            'gender' => ['required', 'integer', 'in:1,2,3'],
+            // メールアドレス
+            'email' => ['required', 'string', 'email', 'max:255'],
+            // 電話番号（3つのパート）
+            'tel1' => ['required', 'string', 'max:5', 'regex:/^[0-9]+$/'],
+            'tel2' => ['required', 'string', 'max:5', 'regex:/^[0-9]+$/'],
+            'tel3' => ['required', 'string', 'max:5', 'regex:/^[0-9]+$/'],
+            // 住所・建物名
+            'address' => ['required', 'string', 'max:255'],
+            'building' => ['nullable', 'string', 'max:255'],
+            // お問い合わせ種類
+            // ★existsルール: categoriesテーブルのid列に存在する値か確認
+            'category_id' => ['required', 'integer', 'exists:categories,id'],
+            // お問い合わせ内容
+            'detail' => ['required', 'string', 'max:120'], // 120文字制限
         ];
     }
 
     /**
-     * tel1/tel2/tel3 を結合して tel を作る（バリデーションの前に実行される）
+     * バリデーションエラーメッセージのカスタマイズ
+     *
+     * @return array
      */
-    protected function prepareForValidation()
+    public function messages()
     {
-        if ($this->filled(['tel1', 'tel2', 'tel3'])) {
-            $this->merge([
-                'tel' => $this->tel1 . '-' . $this->tel2 . '-' . $this->tel3,
-            ]);
-        }
+        return [
+            // 共通
+            'required' => ':attributeは必須です。',
+            'string' => ':attributeを文字列で入力してください。',
+            'max' => ':attributeは:max文字以下で入力してください。',
+            'integer' => ':attributeは数値で選択してください。',
+
+            // 個別
+            'email.email' => '有効なメールアドレス形式を入力してください。',
+            'gender.in' => '性別の値が不正です。',
+            'tel1.regex' => '電話番号は半角数字で入力してください。',
+            'tel2.regex' => '電話番号は半角数字で入力してください。',
+            'tel3.regex' => '電話番号は半角数字で入力してください。',
+            'category_id.exists' => '選択されたお問い合わせの種類は無効です。',
+        ];
+    }
+
+    /**
+     * 属性名の日本語化
+     *
+     * @return array
+     */
+    public function attributes()
+    {
+        return [
+            'last_name' => 'お名前(姓)',
+            'first_name' => 'お名前(名)',
+            'gender' => '性別',
+            'email' => 'メールアドレス',
+            'tel1' => '電話番号',
+            'tel2' => '電話番号',
+            'tel3' => '電話番号',
+            'address' => '住所',
+            'building' => '建物名',
+            'category_id' => 'お問い合わせの種類',
+            'detail' => 'お問い合わせ内容',
+        ];
     }
 }

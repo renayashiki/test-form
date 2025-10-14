@@ -1,35 +1,25 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>管理画面</title>
-  @vite('resources/css/app.css')
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
-  <style>
-    body {
-      font-family: 'Noto Sans JP', sans-serif;
-      background-color: #f5f5f5;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FashionablyLate Admin System</title>
+    <!-- Admin固有のCSSを読み込み -->
+    <link rel="stylesheet" href="{{ asset('css/admin/admin.css') }}"> 
+    <!-- 汎用CSSは、必要に応じてここに含める -->
 </head>
-<body class="min-h-screen flex flex-col">
-  <header class="bg-gray-800 text-white py-4">
-    <div class="container mx-auto px-6 flex justify-between items-center">
-      <h1 class="text-xl font-semibold">管理システム</h1>
-      <nav>
-        <a href="{{ route('admin.index') }}" class="text-sm hover:underline">一覧</a>
-        <a href="{{ route('logout') }}" class="ml-4 text-sm hover:underline">ログアウト</a>
-      </nav>
-    </div>
-  </header>
+<!-- bodyタグのスタイルで、管理者画面全体を強制的に白背景にします -->
+<body style="background-color: #FFFFFF;">
+    <!-- 管理画面のヘッダー -->
+    <header class="admin-header-wrapper">
+        <div class="admin-header">
+            <h1 class="admin-header-logo">FashionablyLate</h1>
+            
+        </div>
+    </header>
 
-  <main class="flex-grow container mx-auto px-6 py-8">
-    @yield('content')
-  </main>
-
-  <footer class="bg-gray-100 py-3 text-center text-sm text-gray-500">
-    &copy; 2025 Coachtech Admin System
-  </footer>
+    <main class="admin-main-content">
+        @yield('content')
+    </main>
 </body>
 </html>

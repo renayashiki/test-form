@@ -1,7 +1,7 @@
 # お問い合わせフォーム
 
 Dockerビルド
-1. git clone　git@github.com:renayashiki/　　test-form.git
+1. git clone git@github.com:renayashiki/test-form.git
 
 2. docker-compose up -d --build
 
@@ -15,6 +15,13 @@ Dockerビルド
 5. php artisan migrate --seed
 6. php artisan db:seed
 
+## 備考
+管理者のログイン情報
+
+admin@example.com
+このメールアドレスでログイン
+password:   password
+パスワードは 'password'でログイン
 ---
 
 ## 使用技術（実行環境）

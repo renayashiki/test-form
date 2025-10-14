@@ -3,64 +3,72 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+// 🚨 ContactRequest, Contact, Category モデル/リクエストをインポート
+use App\Http\Requests\ContactRequest;
 use App\Models\Contact;
 use App\Models\Category;
 
 class ContactController extends Controller
 {
     /**
-     * お問い合わせ入力ページ表示
+     * お問い合わせ入力画面を表示（GET /）
      */
     public function index()
     {
-        // カテゴリー一覧（セレクトボックス用）
+        // 🚨 DB接続エラーやテーブル不足が500の原因となる箇所
+        // Category::all() が成功すれば / の500エラーは解消します。
         $categories = Category::all();
 
         return view('contact.index', compact('categories'));
     }
 
     /**
-     * 確認ページ表示
+     * 確認画面を表示（POST /confirm）
      */
-    public function confirm(Request $request)
+    public function confirm(ContactRequest $request)
     {
-        // バリデーション
-        $validated = $request->validate([
-            'last_name'   => 'required|string|max:255',
-            'first_name'  => 'required|string|max:255',
-            'gender'      => 'required|in:1,2,3',
-            'email'       => 'required|email|max:255',
-            'tel'         => 'required|string|max:20',
-            'address'     => 'required|string|max:255',
-            'building'    => 'nullable|string|max:255',
-            'category_id' => 'required|exists:categories,id',
-            'detail'      => 'required|string|max:120',
-        ]);
+        // ContactRequestでバリデーションされたデータを取得
+        $input = $request->validated();
 
-        // 入力内容を保持して確認ページへ
-        return view('contact.confirm', compact('validated'));
+        // 電話番号を結合
+        $input['tel'] = "{$input['tel1']}-{$input['tel2']}-{$input['tel3']}";
+
+        // カテゴリIDからカテゴリ名を取得
+        $category = Category::find($input['category_id']);
+        $input['category_content'] = $category ? $category->content : '不明';
+
+        return view('contact.confirm', compact('input'));
     }
 
     /**
-     * サンクスページ表示 + データ保存
+     * 確認画面から入力画面へ戻る処理（POST /confirm の back）
      */
-    public function thanks(Request $request)
+    public function back(Request $request)
     {
-        // hiddenで受け取る全データを保存
-        $contact = new Contact();
-        $contact->fill($request->only([
-            'last_name',
-            'first_name',
-            'gender',
-            'email',
-            'tel',
-            'address',
-            'building',
-            'category_id',
-            'detail'
-        ]));
-        $contact->save();
+        // withInput()でデータを保持したまま入力画面に戻る
+        return redirect()->route('contact.index')->withInput($request->except(['_token', 'back']));
+    }
 
+    /**
+     * データを保存し、完了画面へリダイレクト（POST /thanks）
+     */
+    public function store(Request $request)
+    {
+        // 保存に必要なデータのみを取得
+        $input = $request->except(['_token']);
+
+        // データベースに保存
+        Contact::create($input);
+
+        // 二重送信防止のためGETルートへリダイレクト
+        return redirect()->route('contact.thanks');
+    }
+
+    /**
+     * 完了画面を表示（GET /thanks）
+     */
+    public function thanks()
+    {
         return view('contact.thanks');
     }
 }

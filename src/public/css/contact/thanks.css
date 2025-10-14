@@ -1,35 +1,59 @@
-/* ========================================= */
-/* thanksページ */
-/* ========================================= */
-.thanks-container {
-    background-color: #fff;
-    min-height: 100vh;
+/* 既存の contact.css をベースとして継承する */
+
+/* ----------------------------------------------------- */
+/* 完了画面専用スタイル */
+/* ----------------------------------------------------- */
+
+.thanks-content {
+    height: 60vh; /* 画面中央に配置するための高さ */
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     text-align: center;
-    font-family: "Helvetica Neue", Arial, sans-serif;
+    position: relative;
+    overflow: hidden; /* 背景の "Thank you" を隠す */
 }
 
-.thanks-message p {
-    font-size: 20px;
-    color: #7c6e65; /* ベージュ系ブラウン */
-    margin-bottom: 40px;
-    letter-spacing: 0.05em;
+.thanks-background {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 200px;
+    font-weight: bold;
+    color: rgba(75, 46, 30, 0.05); /* 非常に薄い茶色 */
+    pointer-events: none;
+    z-index: 0;
+    white-space: nowrap;
 }
 
-.thanks-button a {
-    display: inline-block;
-    background-color: #7c6e65; /* 見本準拠のブラウンカラー */
-    color: #fff;
-    padding: 10px 60px;
-    border-radius: 3px;
+.thanks-message-wrapper {
+    position: relative;
+    z-index: 10;
+    background-color: transparent; /* 背景透過 */
+}
+
+.thanks-message {
+    font-size: 18px;
+    font-weight: normal;
+    color: var(--color-text-main);
+    margin-bottom: 30px;
+}
+
+.home-button {
+    /* contact.cssで定義されているボタンを使用 */
+    background-color: var(--color-btn-confirm);
+    color: var(--color-btn-text);
+    padding: 10px 30px;
     text-decoration: none;
-    font-size: 16px;
-    transition: opacity 0.3s ease;
+    border-radius: 5px;
+    font-size: 14px;
+    transition: opacity 0.3s;
+    border: none;
+    cursor: pointer;
 }
 
-.thanks-button a:hover {
+.home-button:hover {
     opacity: 0.8;
 }

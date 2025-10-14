@@ -9,7 +9,17 @@ class Category extends Model
 {
     use HasFactory;
 
+    // Categoryモデルはcontentフィールドを編集可能にします
     protected $fillable = [
         'content',
     ];
+
+    /**
+     * Contactとのリレーション定義
+     * 1つのCategoryは複数のContactを持つ
+     */
+    public function contacts()
+    {
+        return $this->hasMany(Contact::class);
+    }
 }

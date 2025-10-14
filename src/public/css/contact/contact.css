@@ -1,123 +1,189 @@
-/* 全体 */
+/* ベースカラー設定 */
+:root {
+    --color-bg: #FFFFFF;
+    --color-text-main: #3b2a1a; /* 主要テキスト: ミルクダークブラウン */
+    --color-label: #3b2a1a;
+    --color-placeholder: rgba(75, 46, 30, 0.4);
+    --color-input-bg: #F9F6F3; /* 入力欄背景色 (ごく淡いベージュ) */
+    --color-error: #c9302c;
+    --color-btn-confirm: #4b2e1e; /* ボタン色: 濃い茶色 */
+    --color-btn-text: #FFFFFF;
+    --color-border-line: rgba(75, 46, 30, 0.1); /* 項目間の薄い線 */
+}
+
+/* ----------------------------------------------------- */
+/* 全体共通スタイル */
+/* ----------------------------------------------------- */
+
 body {
-    background-color: #ffffff !important; /* 背景は完全な白 */
-    color: #3b2a1a;
+    background-color: var(--color-bg);
+    color: var(--color-text-main);
     font-family: 'Noto Sans JP', sans-serif;
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
 }
 
-/* メインコンテナ */
+/* ----------------------------------------------------- */
+/* ヘッダーとコンテナ */
+/* ----------------------------------------------------- */
+
+.header-wrapper {
+    padding: 30px 0;
+    border-bottom: 1px solid var(--color-border-line); 
+}
+
+.header-logo {
+    text-align: left;
+    font-size: 24px;
+    font-weight: 600;
+    margin: 0;
+    color: var(--color-text-main);
+}
+
 .contact-container {
-    width: 70%;
-    max-width: 900px;
-    margin: 80px auto;
+    width: 90%;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 20px 80px 20px;
 }
 
-/* タイトル */
-.brand-title {
-    text-align: center;
-    color: #4b2e1e; /* ミルクダークブラウン */
-    font-size: 36px;
-    font-weight: 700;
-    margin-bottom: 10px;
-}
-
-/* 区切り線 */
-.header-line {
-    width: 100%;
-    height: 1px;
-    background-color: #f1e8de; /* ごく淡いベージュ */
-    border: none;
-    margin-bottom: 25px;
-}
-
-/* Contact 見出し */
 .contact-title {
     text-align: center;
-    color: #4b2e1e;
-    font-size: 22px;
-    font-weight: 600;
-    margin-bottom: 50px;
+    font-size: 24px;
+    font-weight: bold;
+    margin-top: 50px;
+    margin-bottom: 40px;
 }
 
-/* 各フォームグループ */
+/* ----------------------------------------------------- */
+/* フォームレイアウト */
+/* ----------------------------------------------------- */
+
+.contact-form {
+    padding: 0 40px;
+}
+
 .form-group {
-    margin-bottom: 25px;
+    margin-bottom: 0; 
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    border-bottom: 1px solid var(--color-border-line); /* 各項目下に区切り線 */
+    padding: 15px 0;
 }
 
-label {
+/* ラベル (項目名) */
+.form-group label {
+    flex-basis: 150px; 
     display: block;
-    font-weight: 600;
-    margin-bottom: 6px;
-    color: #3b2a1a;
+    padding-top: 10px;
+    font-weight: bold;
+    margin-bottom: 0;
+    color: var(--color-label);
+    font-size: 15px;
 }
 
-.required {
-    color: #c9302c;
+.form-field-wrapper {
+    flex-grow: 1;
+    min-width: 0;
+    padding-top: 5px;
+    padding-right: 15px; 
+}
+
+/* 必須マーク */
+.required-tag {
+    color: var(--color-error);
+    font-size: 14px;
+    margin-left: 5px;
+}
+
+/* ----------------------------------------------------- */
+/* 入力欄（Input/Textarea/Select） */
+/* ----------------------------------------------------- */
+
+input[type="text"],
+input[type="email"],
+.form-select,
+.form-textarea {
+    width: 100%;
+    padding: 10px 12px;
+    border: none; 
+    border-radius: 5px;
+    background-color: var(--color-input-bg); 
+    color: var(--color-text-main);
+    font-size: 14px;
+    box-sizing: border-box;
+    transition: background-color 0.2s;
 }
 
 /* 名前欄 */
-.name-fields {
+.name-inputs {
     display: flex;
-    justify-content: space-between;
-    gap: 2%;
+    gap: 20px;
 }
 
-.name-fields input {
-    width: 49%;
-}
-
-/* 電話番号欄 */
-.tel-fields {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-}
-
-.tel-fields input {
-    width: 25%;
-    text-align: center;
-}
-
-.hyphen {
-    color: #3b2a1a;
-}
-
-/* 入力欄・セレクト・テキストエリア */
-input, select, textarea {
-    width: 100%;
-    padding: 10px 12px;
-    border: none;
-    border-radius: 5px;
-    background-color: #f9f6f3; /* ごく淡いベージュの入力背景 */
-    color: #3b2a1a;
-    font-size: 14px;
-    outline: none;
-}
-
-::placeholder {
-    color: rgba(75, 46, 30, 0.4); /* 透けた茶色（ベージュ寄り） */
+.name-inputs input {
+    flex: 1;
 }
 
 /* 性別 */
 .gender-options {
     display: flex;
+    align-items: center;
     gap: 30px;
+    padding-top: 10px;
+}
+
+.gender-options label {
+    font-weight: normal;
+    font-size: 15px;
+    color: var(--color-text-main);
 }
 
 .gender-options input[type="radio"] {
-    accent-color: #4b2e1e; /* 茶色の● */
+    width: 20px;
+    height: 20px;
+    accent-color: var(--color-btn-confirm);
+    margin-right: 5px;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+
+/* 電話番号欄 */
+.tel-inputs {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.tel-inputs input {
+    width: calc(33.33% - 5px); 
+    text-align: center;
+    border: 1px solid #ccc; 
+}
+
+.tel-separator {
+    color: var(--color-text-main);
 }
 
 /* セレクトボックス */
 .select-wrapper {
     position: relative;
+    width: 100%;
 }
 
-.select-wrapper select {
+.form-select {
     appearance: none;
-    background: #f9f6f3;
-    color: rgba(75, 46, 30, 0.7);
     cursor: pointer;
+    color: var(--color-placeholder); 
+    border: 1px solid #ccc; 
+}
+
+.form-select:not(:focus):required:valid {
+    color: var(--color-text-main);
 }
 
 .select-wrapper::after {
@@ -126,33 +192,64 @@ input, select, textarea {
     right: 15px;
     top: 50%;
     transform: translateY(-50%);
-    color: #4b2e1e;
+    color: var(--color-btn-confirm);
+    font-size: 12px;
     pointer-events: none;
 }
 
 /* テキストエリア */
-textarea {
-    height: 150px;
+.form-textarea {
+    height: 100px;
     resize: none;
+    border: 1px solid #ccc; 
 }
 
-/* 確認ボタン */
-.form-submit {
+/* ----------------------------------------------------- */
+/* エラーメッセージ */
+/* ----------------------------------------------------- */
+
+.name-error-message {
+    width: 100%;
+    padding-left: 0;
+    display: flex;
+    gap: 20px;
+}
+
+.name-error-message p {
+    flex: 1;
+    margin-top: 5px;
+    padding-left: 12px; 
+}
+
+.error-message {
+    color: var(--color-error);
+    font-size: 12px;
+    margin-top: 5px;
+}
+
+/* ----------------------------------------------------- */
+/* ボタン */
+/* ----------------------------------------------------- */
+
+.form-actions {
     text-align: center;
     margin-top: 50px;
+    border-bottom: none;
+    padding: 0;
 }
 
-.form-submit button {
-    background-color: #4b2e1e; /* ミルクダークブラウン */
-    color: #fff;
+.confirm-button {
+    background-color: var(--color-btn-confirm);
+    color: var(--color-btn-text);
     border: none;
     border-radius: 5px;
-    padding: 12px 40px;
+    padding: 12px 60px;
     font-size: 16px;
     cursor: pointer;
     transition: 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-.form-submit button:hover {
-    background-color: #2e1d13;
+.confirm-button:hover {
+    opacity: 0.8;
 }
